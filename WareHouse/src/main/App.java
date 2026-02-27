@@ -1,15 +1,12 @@
 package main;
 
+import Data.SeedData;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import Data.SeedData;
-
-//Name: Abdelrahman Moursi
-//ID: 202406103
 
 public class App {
 	public static final LocalDate TODAY = LocalDate.of(2025, 10, 24);
@@ -49,57 +46,42 @@ public class App {
 		} while (true);
 	}
 
-	// close scanners, save data, and exit
 	public static void exitSystem() {
 		System.out.println("=== Exiting the system ===");
-
-		// Save
-		// data-------------------------------------------------------------------------------------------------
 		System.out.print("Saving Data... ");
-		ObjectOutputStream out = null;
+
+        // FIXED: Used try-with-resources to ensure streams close safely
 		try {
 			if (!sys.getCustomers().isEmpty()) {
-				out = new ObjectOutputStream(new FileOutputStream("Customer_Data.dat"));
-				out.writeObject(sys.getCustomers());
-				out.close();
+				try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Customer_Data.dat"))) {
+					out.writeObject(sys.getCustomers());
+				}
 			}
 			if (!sys.getProducts().isEmpty()) {
-				out = new ObjectOutputStream(new FileOutputStream("Product_Data.dat"));
-				out.writeObject(sys.getProducts());
-				out.close();
+				try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Product_Data.dat"))) {
+					out.writeObject(sys.getProducts());
+				}
 			}
-
 			if (!sys.getDiscounts().isEmpty()) {
-				out = new ObjectOutputStream(new FileOutputStream("Discount_Data.dat"));
-				out.writeObject(sys.getDiscounts());
-				out.close();
+				try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Discount_Data.dat"))) {
+					out.writeObject(sys.getDiscounts());
+				}
 			}
-
 			if (!sys.getOrders().isEmpty()) {
-				out = new ObjectOutputStream(new FileOutputStream("Order_Data.dat"));
-				out.writeObject(sys.getOrders());
-				out.close();
+				try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Order_Data.dat"))) {
+					out.writeObject(sys.getOrders());
+				}
 			}
-
 			if (!sys.getShipments().isEmpty()) {
-				out = new ObjectOutputStream(new FileOutputStream("Shipment_Data.dat"));
-				out.writeObject(sys.getShipments());
-				out.close();
+				try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Shipment_Data.dat"))) {
+					out.writeObject(sys.getShipments());
+				}
 			}
-
 		} catch (IOException ioe) {
-
-		} finally {
-			try {
-				out.close();
-			} catch (IOException e) {
-
-			}
+            System.out.println("Error saving data: " + ioe.getMessage());
 		}
 
-		// -----------------------------------------------------------------------------------------------------------------
-
-		sc.close(); // close the scanner
-		System.exit(0); // exit
+		sc.close(); 
+		System.exit(0); 
 	}
 }

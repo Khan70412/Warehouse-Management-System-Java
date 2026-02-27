@@ -1,15 +1,13 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import Discount.Discount;
 import Orders.Order;
-import Orders.OrderItem;
 import PaymentSystem.*;
 import Products.Product;
 import Products.ProductListView;
 import Shipment.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 //Name: Abdelrahman Moursi
 //ID: 202406103
@@ -68,25 +66,41 @@ public class CustomerMenu {
 				}
 
 			} // DONE
-			case 3 -> {// adds the qnty from the cart back to the stock, before removing the item
+			case 3 -> {
+				if (currentC.shoppingcart.isEmpty()) {
+					System.out.println("Cart is Empty!");
+					break; // FIXED: Prevent crash if cart is empty
+				}
 				currentC.shoppingcart.print();
 				System.out.print("Enter index: > ");
 				int index = sc.nextInt();
-				CartItem removedItem = currentC.shoppingcart.getItems().get(index);
-				Product removed = currentC.shoppingcart.getItems().get(index).getProduct();
+                
+                // FIXED: Index out of bounds check
+                if (index >= 0 && index < currentC.shoppingcart.getItems().size()) {
+				    CartItem removedItem = currentC.shoppingcart.getItems().get(index);
+				    Product removed = currentC.shoppingcart.getItems().get(index).getProduct();
 
-				removed.setStock(removed.getStock() + removedItem.getQuantity());// adds the qnty back to stock
-				currentC.shoppingcart.removeIndex(index);// remove from cart
+				    removed.setStock(removed.getStock() + removedItem.getQuantity());
+				    currentC.shoppingcart.removeIndex(index);
+                    System.out.println("Item removed.");
+                } else {
+                    System.out.println("Invalid index!");
+                }
 			}
-			case 4 -> {// DONE
+			case 4 -> {
 				if (currentC.shoppingcart.isEmpty())
 					System.out.println("Cart is Empty!");
 				else
 					currentC.shoppingcart.print();
-
 			}
-			case 5 -> checkout(sc, sys, currentC);// checkout
-
+			case 5 -> {
+                // FIXED: Prevent empty cart checkout
+                if (currentC.shoppingcart.isEmpty()) {
+                    System.out.println("Cannot checkout. Cart is empty!");
+                } else {
+                    checkout(sc, sys, currentC);
+                }
+            }
 			case 0 -> choice = 0;
 			default -> System.out.println("Invalid choice!, try again (Customer Menu)");
 			}

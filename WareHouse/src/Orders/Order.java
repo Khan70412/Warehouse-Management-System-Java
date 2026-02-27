@@ -1,17 +1,14 @@
 package Orders;
 
+import Discount.Discount;
+import PaymentSystem.Payment;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import Discount.Discount;
-import PaymentSystem.Payment;
 import main.App;
 import main.Customer;
 
-// Anas Ali Khan
-// 11/05/2025
-public class Order implements Serializable  {
+public class Order implements Serializable {
 	private String id;
 	private LocalDate date;
 	private double subtotal;
@@ -23,22 +20,8 @@ public class Order implements Serializable  {
 	private Discount appliedDiscount;
 	private Payment payment;
 
-	// Initializes the date to current date
-	/**
-	 * @param id
-	 * @param customer
-	 * @param date
-	 * @param items
-	 * @param subtotal
-	 * @param discountAmount
-	 * @param shippingFee
-	 * @param total
-	 * @param appliedDiscount
-	 * @param payment
-	 */
 	public Order(Customer customer, ArrayList<OrderItem> items, double subtotal,
 			double discountAmount, double shippingFee, double total, Discount appliedDiscount, Payment payment) {
-
 		this.id = OrderIdGenerator.nextId();
 		this.customer = customer;
 		this.date = App.TODAY;
@@ -51,78 +34,18 @@ public class Order implements Serializable  {
 		this.payment = payment;
 	}
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @return the customer
-	 */
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	/**
-	 * @return the date
-	 */
-	public LocalDate getDate() {
-		return date;
-	}
-
-	/**
-	 * @return the items
-	 */
-	public ArrayList<OrderItem> getItems() {
-		return items;
-	}
-
-	/**
-	 * @return the subtotal
-	 */
-	public double getSubtotal() {
-		return subtotal;
-	}
-
-	/**
-	 * @return the discountAmount
-	 */
-	public double getDiscountAmount() {
-		return discountAmount;
-	}
-
-	/**
-	 * @return the shippingFee
-	 */
+	public String getId() { return id; }
+	public Customer getCustomer() { return customer; }
+	public LocalDate getDate() { return date; }
+	public ArrayList<OrderItem> getItems() { return items; }
+	public double getSubtotal() { return subtotal; }
+	public double getDiscountAmount() { return discountAmount; }
+	
 	public double getShippingFee() {
-		this.shippingFee += this.total;
-		return shippingFee;
+		return shippingFee; // FIXED: Removed the invalid modification here
 	}
 
-	/**
-	 * @return the total
-	 */
-	public double getTotal() {
-		return total;
-		
-	}
-
-	/**
-	 * @return the appliedDiscount
-	 */
-	public Discount getAppliedDiscount() {
-		
-		return this.appliedDiscount;
-	}
-	
-	/**
-	 * @return the payment
-	 */
-	public Payment getPayment() {
-		return payment;
-	}
-
-	
+	public double getTotal() { return total; }
+	public Discount getAppliedDiscount() { return this.appliedDiscount; }
+	public Payment getPayment() { return payment; }
 }
