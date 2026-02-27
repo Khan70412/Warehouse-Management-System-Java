@@ -1,17 +1,16 @@
 package Data;
 
-import java.io.IOException;
+import Discount.*;
+import Orders.*;
+import Products.*;
+import Shipment.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.*;
-
-import Discount.*;
-import Orders.*;
 import main.*;
-import Shipment.*;
-import Products.*;
 
 public class SeedData {
 	public static void load(WarehouseSystem s) {

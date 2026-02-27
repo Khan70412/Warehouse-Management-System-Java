@@ -1,14 +1,13 @@
 package Data;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import Discount.*;
-import main.*;
 import Orders.*;
 import PaymentSystem.CashPayment;
 import Products.*;
 import Shipment.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import main.*;
 
 public class ReportService {
 
@@ -142,23 +141,25 @@ public class ReportService {
 			
 			for (Order order : sys.getOrders()) {
 				totalPayment += order.getTotal();
-				if (order.getPayment() instanceof CashPayment)
-					if (!cash.contains(order.getCustomer().getName()))
-					cash.add(order.getCustomer().getName());
-				else {
-					if (!card.contains(order.getCustomer().getName()))
-					card.add(order.getCustomer().getName()); }
+				// FIXED: Added curly braces here
+				if (order.getPayment() instanceof CashPayment) {
+					if (!cash.contains(order.getCustomer().getName())) {
+					    cash.add(order.getCustomer().getName());
+                    }
+				} else {
+					if (!card.contains(order.getCustomer().getName())) {
+					    card.add(order.getCustomer().getName()); 
+                    }
+                }
 			}
 			
 			String CashNames = cash.toString().replace("[", "").replace("]", "");
 			String CardNames = card.toString().replace("[", "").replace("]", "");
 			System.out.printf("Total: QAR %.2f \n", totalPayment);
-			if (cash.size() == 0)
+			if (cash.isEmpty())
 				System.out.printf("(Card for %s) \n", CardNames);
-				
-			else if (card.size() == 0) 
+			else if (card.isEmpty()) 
 				System.out.printf("(Cash for %s) \n", CashNames);
-			
 			else	
 				System.out.printf("(mix: card for %s; cash for %s) \n", CardNames, CashNames);
 		}
