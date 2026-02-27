@@ -21,16 +21,6 @@ public class SeedData {
 		File shipmentFile = new File("Shipment_Data.dat");
 		File productFile = new File("Product_Data.dat");
 		
-//		
-//		customerFile = (customerFile.exists()) ? new File("Customer_Data.dat") :  new File("Customer_Seed.dat");
-//		discountsFile = (discountsFile.exists()) ? new File("Discount_Data.dat") : new File("Discount_Seed.dat");
-//		orderFile = (orderFile.exists()) ? new File("Order_Data.dat") :  new File("Order_Seed.dat");
-//		shipmentFile = (shipmentFile.exists()) ? new File("Shipment_Data.dat") :  new File("Shipment_Seed.dat");
-//		productFile = (productFile.exists()) ? new File("Product_Data.dat") : new File("Product_Seed.dat");
-		
-
-		
-		
 		
 
 		// data-------------------------------------------------------------------------------------------------
@@ -43,7 +33,7 @@ public class SeedData {
 			s.getCustomers().addAll(customer);
 
 		} catch (IOException e) {
-			
+			System.out.println("Debug: Could not load file (might not exist yet).");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
@@ -65,7 +55,7 @@ public class SeedData {
 			s.getProducts().addAll(products);
 
 		} catch (IOException e) {
-			
+			System.out.println("Debug: Could not load file (might not exist yet).");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
@@ -106,7 +96,7 @@ public class SeedData {
 			s.getOrders().addAll(orders);
 
 		} catch (IOException e) {
-			
+			System.out.println("Debug: Could not load file (might not exist yet).");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
@@ -127,7 +117,7 @@ public class SeedData {
 			s.getShipments().addAll(shipments);
 
 		} catch (IOException e) {
-			
+			System.out.println("Debug: Could not load file (might not exist yet).");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {

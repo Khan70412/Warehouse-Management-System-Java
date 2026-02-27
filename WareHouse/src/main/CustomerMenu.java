@@ -9,8 +9,6 @@ import Shipment.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Name: Abdelrahman Moursi
-//ID: 202406103
 
 public class CustomerMenu {
 

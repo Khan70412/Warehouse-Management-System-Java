@@ -1,14 +1,11 @@
 package main;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import Orders.OrderItem;
 import Products.Product;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-//Anas Ali Khan
-//11/05/2025
+
 
 public class ShoppingCart implements Serializable {
 	private ArrayList<CartItem> items = new ArrayList<>();

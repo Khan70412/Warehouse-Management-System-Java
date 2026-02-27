@@ -2,9 +2,6 @@ package Shipment;
 
 import java.io.Serializable;
 
-//Name: Salih Alhaj
-//ID: 202405408
-//Date: 11-11-2025
 
 public class Address implements Serializable {
 

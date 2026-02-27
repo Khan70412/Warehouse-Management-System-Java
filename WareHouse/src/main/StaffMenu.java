@@ -1,15 +1,13 @@
 package main;
 
-import java.time.LocalDate;
-import java.util.Scanner;
-
 import Data.ReportService;
 import Discount.*;
 import Products.*;
 import Shipment.*;
+import java.time.LocalDate;
+import java.util.Scanner;
 
-//Name: Abdelrahman Moursi
-//ID: 202406103
+
 
 public class StaffMenu {
 
@@ -57,19 +55,29 @@ public class StaffMenu {
 
 	}
 
-	private static void listToggleDiscounts(Scanner sc, WarehouseSystem sys) {// DONE
+	private static void listToggleDiscounts(Scanner sc, WarehouseSystem sys) {
 		int i = 0;
 		for (Discount d : sys.getDiscounts()) {
 			System.out.printf("%d) %s\n", i, d.detailsTail());
 			i++;
 		}
 		System.out.print("Enter index to toggle (blank to skip): > ");
+		sc.nextLine(); // Clear the leftover newline buffer from previous int input
 		String input = sc.nextLine();
-		input = sc.nextLine();
-		if (!(input.isBlank())) {
-			int index = Integer.parseInt(input);
-			Discount currentD = sys.getDiscounts().get(index);
-			sys.setDiscountActive(currentD, !(sys.getDiscounts().get(index).isActive()));
+
+		if (!input.isBlank()) {
+			try {
+				int index = Integer.parseInt(input);
+				if (index >= 0 && index < sys.getDiscounts().size()) {
+					Discount currentD = sys.getDiscounts().get(index);
+					sys.setDiscountActive(currentD, !(currentD.isActive()));
+					System.out.println("Discount toggled.");
+				} else {
+					System.out.println("Invalid discount index.");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid input. Skipping.");
+			}
 		}
 	}
 

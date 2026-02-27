@@ -1,16 +1,14 @@
 package main;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import Discount.Discount;
 import Orders.Order;
 import Products.Product;
 import Shipment.RateTable;
 import Shipment.Shipment;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-//Name: Abdelrahman Moursi
-//ID: 202406103
+
 
 public class WarehouseSystem {
 	private LocalDate today;

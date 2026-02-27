@@ -2,8 +2,7 @@ package main;
 
 import java.io.Serializable;
 
-//Name: Abdelrahman Moursi
-//ID: 202406103
+
 
 public class Customer implements Serializable  {
 	private String id;
